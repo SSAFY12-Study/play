@@ -13,4 +13,10 @@ defineProps({
   </div>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+h1 {
+  font-family: 'Monoton', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+</style>
