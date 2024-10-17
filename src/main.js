@@ -11,4 +11,6 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
+// Make sure to apply all app configurations before mounting the app!
+
 app.mount('#app')
