@@ -9,14 +9,8 @@ defineProps({
 
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <div class="text-h1">{{ msg }}</div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-h1 {
-  font-family: 'Monoton', sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-</style>
+<style scoped></style>
