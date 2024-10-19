@@ -14,11 +14,13 @@ import { RouterLink, RouterView } from 'vue-router'
 
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Test</RouterLink>
+        <RouterLink to="/">홈 페이지</RouterLink>
+      </nav>
+      <nav>
+        <RouterLink to="/test">테스트 페이지</RouterLink>
       </nav>
     </div>
   </header>
-
   <RouterView />
 </template>
 

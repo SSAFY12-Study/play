@@ -2,6 +2,7 @@ import './assets/main.scss'
 
 // Vuetify
 import { createVuetify } from 'vuetify'
+import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
