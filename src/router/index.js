@@ -9,23 +9,28 @@ const router = createRouter({
       component: () => import('@/views/MainView.vue'),
     },
     {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/LoginView.vue'),
+    },
+    {
       path: '/test',
       name: 'test',
       component: () => import('@/views/TestView.vue'),
     },
     {
       path: '/test/login',
-      name: 'login',
+      name: 'test/login',
       component: () => import('@/components/LoginView.vue'),
     },
     {
       path: '/test/signup',
-      name: 'signup',
+      name: 'test/signup',
       component: () => import('@/components/SignUpView.vue'),
     },
     {
       path: '/test/appbar',
-      name: 'appbar',
+      name: 'test/appbar',
       component: () => import('@/components/AppBarView.vue'),
     },
   ],
