@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import IconKakaoLogin from '@/components/icons/IconKakaoLogin.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter();
 
 const id = defineModel('id')
 const password = defineModel('password')
@@ -15,21 +18,48 @@ const submit = async event => {
     console.log(
       JSON.stringify({ id: id.value, password: password.value }, null, 2),
     )
+    await login(id.value, password.value)
   } else {
     console.log(JSON.stringify(results, null, 2))
   }
   loading.value = false
 }
 
+const login = async (username, password) => {
+  const url = '/play/login';
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      // 'X-CSRF-TOKEN': csrfToken, // CSRF 토큰 추가
+    },
+    body: new URLSearchParams({
+      username: username,
+      password: password,
+    }),
+    credentials: 'include'
+  });
+
+  if (response.ok) {
+    console.log('Login successful!');
+    await router.replace({ name: 'main' });
+  } else {
+    console.error('Login failed:', response.statusText);
+    await router.replace({ name: 'login' });
+    alert('Login failed! Please check your credentials.');
+  }
+};
+
 const idRules = [
   value => {
     if (value) return true
     return '아이디는 필수입니다.'
   },
-  value => {
-    if (value?.length <= 10 && value?.length >= 5) return true
-    return '아이디는 5글자 이상 10글자 이하 입니다.'
-  },
+  // value => {
+  //   if (value?.length <= 10 && value?.length >= 5) return true
+  //   return '아이디는 5글자 이상 10글자 이하 입니다.'
+  // },
 ]
 
 const passwordRules = [
@@ -37,10 +67,10 @@ const passwordRules = [
     if (value) return true
     return '비밀번호는 필수입니다.'
   },
-  value => {
-    if (value?.length <= 20 && value?.length >= 10) return true
-    return '비밀번호는 10글자 이상 20글자 이하 입니다.'
-  },
+  // value => {
+  //   if (value?.length <= 20 && value?.length >= 10) return true
+  //   return '비밀번호는 10글자 이상 20글자 이하 입니다.'
+  // },
 ]
 </script>
 
@@ -98,6 +128,8 @@ const passwordRules = [
         <!--카카오로 로그인-->
         <v-col cols="12">
           <v-btn
+            href="/play/oauth2/authorization/kakao"
+            :loading="loading"
             height="58"
             block
             color="#fee500"
