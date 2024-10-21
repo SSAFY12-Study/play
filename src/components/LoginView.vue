@@ -42,12 +42,12 @@ const login = async (username, password) => {
   });
 
   if (response.ok) {
-    console.log('Login successful!');
+    console.log('Form Login successful!');
     await router.replace({ name: 'main' });
   } else {
-    console.error('Login failed:', response.statusText);
+    console.error('Form Login failed:', response.statusText);
     await router.replace({ name: 'login' });
-    alert('Login failed! Please check your credentials.');
+    alert('Form Login failed! Please check your credentials.');
   }
 };
 
@@ -56,10 +56,10 @@ const idRules = [
     if (value) return true
     return '아이디는 필수입니다.'
   },
-  // value => {
-  //   if (value?.length <= 10 && value?.length >= 5) return true
-  //   return '아이디는 5글자 이상 10글자 이하 입니다.'
-  // },
+  value => {
+    if (value?.length <= 10 && value?.length >= 5) return true
+    return '아이디는 5글자 이상 10글자 이하 입니다.'
+  },
 ]
 
 const passwordRules = [
@@ -67,10 +67,10 @@ const passwordRules = [
     if (value) return true
     return '비밀번호는 필수입니다.'
   },
-  // value => {
-  //   if (value?.length <= 20 && value?.length >= 10) return true
-  //   return '비밀번호는 10글자 이상 20글자 이하 입니다.'
-  // },
+  value => {
+    if (value?.length <= 20 && value?.length >= 10) return true
+    return '비밀번호는 10글자 이상 20글자 이하 입니다.'
+  },
 ]
 </script>
 
@@ -98,6 +98,7 @@ const passwordRules = [
         <!--비밀번호-->
         <v-col cols="12">
           <v-text-field
+            type="password"
             v-model="password"
             :counter="20"
             :rules="passwordRules"
